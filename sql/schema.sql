@@ -1,3 +1,6 @@
+-- run this in shell to create database
+-- sqlite3 var/donation_management.sqlite3 < sql/schema.sql
+
 PRAGMA foreign_keys = ON;
 
 -- Create the 'type' table
@@ -29,7 +32,7 @@ CREATE TABLE staff (
     staff_password_hashed TEXT,
     staff_name TEXT,
     staff_created_by_staff_id INTEGER,
-    FOREIGN KEY (created_by_staff_id) REFERENCES staff(staff_id)
+    FOREIGN KEY (staff_created_by_staff_id) REFERENCES staff(staff_id)
 );
 
 -- Create the 'donation' table
