@@ -32,6 +32,7 @@ CREATE TABLE staff (
     staff_password_hashed TEXT,
     staff_name TEXT,
     staff_created_by_staff_id INTEGER,
+    staff_deleted BOOLEAN,
     FOREIGN KEY (staff_created_by_staff_id) REFERENCES staff(staff_id)
 );
 
