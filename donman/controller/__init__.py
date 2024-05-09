@@ -1,7 +1,9 @@
 """REST API."""
-from .donation import donation_bp
 from flask import Flask
 from ..config import Config
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 def create_app():
     # app is a single object used by all the code modules in this package
@@ -18,6 +20,14 @@ def create_app():
     # $ export INSTA485_SETTINGS=secret_key_config.py
     app.config.from_envvar('DONMAN_SETTINGS', silent=True)
 
+
+    db.init_app(app)
+    
     # Register donations blueprint
+    from .donation import donation_bp
+    from .type import type_bp
     app.register_blueprint(donation_bp, url_prefix='/api')
+    app.register_blueprint(type_bp, url_prefix='/api')
+    
+
     return app
