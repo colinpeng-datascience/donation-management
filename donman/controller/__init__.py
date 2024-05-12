@@ -26,8 +26,16 @@ def create_app():
     # Register donations blueprint
     from .donation import donation_bp
     from .type import type_bp
+    from .distribution import distribution_bp
+    from .donor import donor_bp
+    from .report import report_bp
+    from .staff import staff_bp
     app.register_blueprint(donation_bp, url_prefix='/api')
     app.register_blueprint(type_bp, url_prefix='/api')
+    app.register_blueprint(distribution_bp, url_prefix='/api')
+    app.register_blueprint(donor_bp, url_prefix='/api')
+    app.register_blueprint(report_bp, url_prefix='/api')
+    app.register_blueprint(staff_bp, url_prefix='/api')
     
 
     return app
