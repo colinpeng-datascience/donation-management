@@ -38,6 +38,13 @@ class Staff(db.Model):
         db.ForeignKeyConstraint(['staff_created_by_staff_id'], ['staff.staff_id']),
         db.ForeignKeyConstraint(['staff_deleted_by_staff_id'], ['staff.staff_id']),
     )
+    def serialize(self):
+        """Return staff data in serialized format"""
+        return {
+            'id': self.staff_id,
+            'name': self.staff_name,
+            'email': self.staff_email
+        }
 
 class Donation(db.Model):
     __tablename__ = 'donation'
