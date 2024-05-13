@@ -2,9 +2,7 @@
 from flask import Flask
 from ..config import Config
 from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
-
+from ..model import db
 def create_app():
     # app is a single object used by all the code modules in this package
     app = Flask(__name__)  # pylint: disable=invalid-name
@@ -22,6 +20,7 @@ def create_app():
 
 
     db.init_app(app)
+    
     
     # Register donations blueprint
     from .donation import donation_bp

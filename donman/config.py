@@ -14,3 +14,6 @@ class Config:
     DONMAN_ROOT = pathlib.Path(__file__).resolve().parent.parent
     DATABASE_FILENAME = DONMAN_ROOT/'var'/'donman.sqlite3'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(DATABASE_FILENAME)
+    ADMIN_EMAIL = "admin@admin.com"
+    ADMIN_NAME = "admin"
+    ADMIN_PASSWORD = "admin"

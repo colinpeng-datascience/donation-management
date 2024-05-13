@@ -8,6 +8,10 @@ version = "0.1.0"
 dependencies = [
     "Flask",
     "requests",
+    "Flask-SQLAlchemy",
+    "flask-restful",
+    "flask-bcrypt", 
+    "flask-migrate"
 ]
 requires-python = ">=3.10"
 

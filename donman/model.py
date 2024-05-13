@@ -1,6 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from donman.controller import db
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 class Type(db.Model):
     __tablename__ = 'type'
@@ -19,20 +20,31 @@ class Subtype(db.Model):
     type_id = db.Column(db.Integer, db.ForeignKey('type.type_id'))
     subtype_name = db.Column(db.Text, nullable=False)
     __table_args__ = (db.UniqueConstraint('type_id', 'subtype_name'),)
-
+    def serialize(self):
+        """Return subtype data in serialized format"""
+        return {
+            'id': self.subtype_id,
+            'name': self.subtype_name,
+        }
 class Donor(db.Model):
     __tablename__ = 'donor'
     donor_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     donor_email = db.Column(db.Text, unique=True, nullable=False)
     donor_name = db.Column(db.Text, nullable=False)
-
+    def serialize(self):
+        """Return donor data in serialized format"""
+        return {
+            'id': self.donor_id,
+            'email': self.donor_email,
+            'name': self.donor_name,
+        }
 class Staff(db.Model):
     __tablename__ = 'staff'
     staff_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     staff_email = db.Column(db.Text, unique=True, nullable=False)
     staff_password_hashed = db.Column(db.Text, nullable=False)
     staff_name = db.Column(db.Text, nullable=False)
-    staff_created_by_staff_id = db.Column(db.Integer, db.ForeignKey('staff.staff_id'), nullable=False)
+    staff_created_by_staff_id = db.Column(db.Integer, db.ForeignKey('staff.staff_id'), nullable=True)
     staff_deleted_by_staff_id = db.Column(db.Boolean)
     __table_args__ = (
         db.ForeignKeyConstraint(['staff_created_by_staff_id'], ['staff.staff_id']),
