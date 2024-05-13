@@ -8,6 +8,7 @@ venv/
 venv3/
 .venv/
 .pytest_cache
+migrations/
 
 # JavaScript
 bundle.js
@@ -35,3 +36,4 @@ Icon
 .dropbox*
 
 var/*
+session.json
