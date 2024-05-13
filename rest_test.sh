@@ -112,4 +112,4 @@ http --session=./session.json GET "${BASE_API}/report/subtype/${subtype_id}"
 
 # Logout
 echo "Logging out..."
-http --session=./session.json DELETE "${BASE_API}/staff/logout"
+http --session=./session.json DELETE "${BASE_API}/staff/login"
