@@ -95,12 +95,11 @@ def register_type():
         new_type = Type(type_name=type_name)
         db.session.add(new_type)
         db.session.commit()
-
-        register_subtype_response = _register_subtype(new_type.type_id, "other")
-        if register_subtype_response[1] != 200:
-            raise RuntimeError('Failed to register default subtype')
-
-        return jsonify({'message': 'Type registered successfully', 'type_id': new_type.id}), 201
+        new_subtype = Subtype(type_id=new_type.type_id, subtype_name="other")
+        db.session.add(new_subtype)
+                
+        db.session.commit()
+        return jsonify({'message': 'Type registered successfully', 'type_id': new_type.type_id}), 201
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': 'An unexpected error occurred', 'details': str(e)}), 500
@@ -184,18 +183,9 @@ def register_subtype():
         return jsonify({'error': 'Invalid data provided'}), 400
     
     try:
-        return _register_subtype(type_id, subtype_name)
+        new_subtype = Subtype(type_id=type_id, subtype_name=subtype_name)
+        db.session.add(new_subtype)
+        db.session.commit()
     except Exception as e:
         # Handle any  unexpected exceptions here
         return jsonify({'error': 'An unexpected error occurred while registering subtype', 'details': str(e)}), 500
-
-def _register_subtype(type_id, subtype_name):
-    new_subtype = Subtype(type_id=type_id, subtype_name=subtype_name)
-    db.session.add(new_subtype)
-    
-    try:
-        db.session.commit()
-        return jsonify({'message': 'Type registered successfully', 'type_id': new_subtype.id}), 200
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({'error': 'Failed to register subtype', 'details': str(e)}), 500

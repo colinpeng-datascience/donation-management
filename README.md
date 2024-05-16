@@ -37,21 +37,21 @@ pip install -e .
 export FLASK_APP=donman
 ```
 
-5. Initialize the database:
-```sh
-flask db init
-```
-
-6. Run the initial migration:
-```sh
-flask db migrate -m "Initial migration"
-```
-
-7. Create the `var` directory and touch the 
+5. Create the `var` directory and touch the 
 SQLite3 file:
 ```sh
 mkdir var
 touch var/donman.sqlite3
+```
+
+6. Initialize the database:
+```sh
+flask db init
+```
+
+7. Run the initial migration:
+```sh
+flask db migrate -m "Initial migration"
 ```
 
 8. Perform the migration and upgrade the database:

@@ -1,5 +1,4 @@
 from donman.model import Type, Staff, Subtype
-from donman.controller.type import _register_subtype
 from werkzeug.security import generate_password_hash
 from donman.controller import db
 import click
