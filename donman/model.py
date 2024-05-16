@@ -19,7 +19,7 @@ class Subtype(db.Model):
     subtype_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     type_id = db.Column(db.Integer, db.ForeignKey('type.type_id'))
     subtype_name = db.Column(db.Text, nullable=False)
-    __table_args__ = (db.UniqueConstraint('type_id', 'subtype_name'),)
+    __table_args__ = (db.UniqueConstraint('type_id'),)
     def serialize(self):
         """Return subtype data in serialized format"""
         return {

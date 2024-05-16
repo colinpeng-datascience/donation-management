@@ -59,7 +59,7 @@ http --session=./session.json DELETE "$BASE_API_URL/staff/login"
 
 # Attempt logout without an active session (error case)
 echo "Logging out without active session..."
-http DELETE "$BASE_API_URL/staff/logout"
+http DELETE "$BASE_API_URL/staff/login"
 
 # Login
 echo "Login as admin..."
